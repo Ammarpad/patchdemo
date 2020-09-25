@@ -90,6 +90,8 @@ if ( $useOAuth && !$user ) {
 							'flags' => [ 'progressive', 'primary' ]
 						] ),
 						[
+							'classes' => [ 'createField' ],
+							'warnings' => $config[ 'newWikiWarning' ] ? [ new OOUI\HtmlSnippet( $config[ 'newWikiWarning' ] ) ] : [],
 							'label' => ' ',
 							'align' => 'left',
 						]
@@ -98,11 +100,6 @@ if ( $useOAuth && !$user ) {
 			] ),
 		]
 	] );
-
-	$banner = banner_html();
-	if ( $banner ) {
-		echo "<p class='banner'>$banner</p>";
-	}
 }
 ?>
 <br/>
