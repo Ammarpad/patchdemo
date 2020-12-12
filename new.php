@@ -24,6 +24,7 @@ function abandon( $err ) {
 		<script>
 			pd.installProgressField.fieldWidget.setDisabled( true );
 			pd.installProgressField.setErrors( [ $errJson ] );
+			pd.notify( 'Your PatchDemo wiki failed to build', $errJson );
 		</script>
 EOT;
 	delete_wiki( $namePath );
@@ -43,6 +44,7 @@ EOT;
 		echo <<<EOT
 		<script>
 			pd.openWiki.setDisabled( false );
+			pd.notify( 'Your PatchDemo wiki is ready!' );
 		</script>
 EOT;
 
@@ -77,6 +79,19 @@ echo new OOUI\FieldsetLayout( [
 				'label' => "When complete, use this button to open your wiki ($namePath)",
 				'help' => "You can log in as user 'Patch Demo', password 'patchdemo1'.",
 				'helpInline' => true,
+			]
+		),
+		new OOUI\FieldLayout(
+			// Placeholder, will be replaced by a ToggleButtonWidget in JS
+			new OOUI\ButtonWidget( [
+				'icon' => 'bell',
+				'disabled' => 'true'
+			] ),
+			[
+				'align' => 'inline',
+				'classes' => [ 'enableNotifications' ],
+				'label' => 'Get notified when this wiki is ready',
+				'infusable' => true,
 			]
 		),
 	]
